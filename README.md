@@ -159,7 +159,7 @@ Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://tw
 
 Second part of Airbnb: Joann Vuong
 
-RESTful API
+## RESTful API
 Diana Sofía García - [Github](https://github.com/Sofiag8) / [Twitter](https://twitter.com/Sofiiagarca)
 Santiago Pinzón - [Github](https://github.com/santiagoPinzonD) / [Twitter](https://twitter.com/santiagopinzonD)
 
