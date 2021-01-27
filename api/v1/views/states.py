@@ -3,7 +3,7 @@
 from models import storage
 from models.state import State
 from api.v1.app import not_found, app_views
-from flask import jsonify, request, make_response
+from flask import jsonify, request, make_response, abort
 
 
 @app_views.route('/states', methods=['GET'], strict_slashes=False)
@@ -18,9 +18,9 @@ def state_objs(state_id=None):
 def state_by_id(state_id=None):
     """Return state by id"""
     state_objs = storage.get(State, state_id)
-    if state_id:
+    if state_objs:
         return jsonify(state_objs.to_dict())
-    return not_found(404)
+    return abort(404)
 
 
 @app_views.route('/states/<state_id>', methods=['DELETE'],
@@ -32,7 +32,7 @@ def delete_state(state_id=None):
         storage.delete(state_objs)
         storage.save()
         return make_response(jsonify({}), 200)
-    return not_found(404)
+    return abort(404)
 
 
 @app_views.route('/states', methods=['POST'], strict_slashes=False)
@@ -64,4 +64,4 @@ def state_put(state_id=None):
         storage.save()
         return make_response(jsonify(state_objs.to_dict()), 200)
     else:
-        return not_found(404)
+        return abort(404)
