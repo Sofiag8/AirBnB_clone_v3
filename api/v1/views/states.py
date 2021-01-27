@@ -30,6 +30,7 @@ def delete_state(state_id=None):
     state_objs = storage.get(State, state_id)
     if state_objs:
         storage.delete(state_objs)
+        storage.save()
         return make_response(jsonify({}), 200)
     return not_found(404)
 
