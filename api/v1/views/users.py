@@ -42,7 +42,7 @@ def user_post():
         return make_response(jsonify({'error': 'Missing name'}), 400)
     if 'email' not in request.get_json():
         return make_response(jsonify({'error': 'Missing email'}), 400)
-    if 'password' not in request.get_json():
+    elif 'password' not in request.get_json():
         return make_response(jsonify({'error': 'Missing password'}), 400)
 
     dict_body = request.get_json()
@@ -52,7 +52,7 @@ def user_post():
     return make_response(jsonify(new_user.to_dict()), 201)
 
 
-@app_views.route('users/<user_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
 def user_put(user_id=None):
     """Update user object"""
     if not request.get_json():
@@ -62,7 +62,7 @@ def user_put(user_id=None):
     if user_objs:
         for key, value in dict_body.items():
             if key != "id" and key != "created_at" and key != "updated_at"\
-                and key != "email":
+                    and key != "email":
                 setattr(user_objs, key, value)
         storage.save()
         return make_response(jsonify(user_objs.to_dict()), 200)
