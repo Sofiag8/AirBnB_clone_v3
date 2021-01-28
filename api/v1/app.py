@@ -15,7 +15,7 @@ cors = CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 @app.teardown_appcontext
 def close(self):
     """Clossing session method"""
-    storage.close(app, resources=r"/*")
+    storage.close()
 
 
 @app.errorhandler(404)
