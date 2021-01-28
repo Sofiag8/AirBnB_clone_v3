@@ -84,8 +84,6 @@ class DBStorage:
                 returns the object based on the class and its ID,
                 or None if not found
         """
-        if cls not in classes.values():
-            return None
         cls_objs = self.all(cls)
         for value in cls_objs.values():
             if value.id == id:
