@@ -9,9 +9,7 @@ from flask import jsonify, request, make_response, abort
 @app_views.route('/states', methods=['GET'], strict_slashes=False)
 def state_objs(state_id=None):
     """Return all States"""
-    for obj in storage.all(State).values():
-        objs_dict = obj.to_dict()
-    return jsonify(objs_dict)
+    return jsonify([obj.to_dict() for obj in storage.all(State).values()])
 
 
 @app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
@@ -20,7 +18,7 @@ def state_by_id(state_id=None):
     state_objs = storage.get(State, state_id)
     if state_objs:
         return jsonify(state_objs.to_dict())
-    return abort(404)
+    abort(404)
 
 
 @app_views.route('/states/<state_id>', methods=['DELETE'],
