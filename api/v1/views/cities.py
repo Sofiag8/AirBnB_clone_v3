@@ -51,7 +51,7 @@ def city_post(state_id=None):
     if state_objs:
         dict_body = request.get_json()
         new_city = City(**dict_body)
-        new_city.state_id = state.id
+        new_city.state_id = state_objs.id
         storage.new(new_city)
         storage.save()
         return make_response(jsonify(new_city.to_dict()), 201)
