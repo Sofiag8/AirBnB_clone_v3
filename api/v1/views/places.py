@@ -68,7 +68,7 @@ def place_post(city_id=None):
 
 @app_views.route('/places/<place_id>', methods=['PUT'],
                  strict_slashes=False)
-def city_put(place_id=None):
+def place_put(place_id=None):
     """Update Place object"""
     if not request.get_json():
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
@@ -76,8 +76,8 @@ def city_put(place_id=None):
     place_obj = storage.get(Place, place_id)
     if place_obj:
         for key, value in dict_body.items():
-            if key != "id" and key != "created_at" and key != "updated_at"
-            and key != "user_id" and key != "city_id":
+            if key != "id" and key != "created_at" and key != "updated_at"\
+               and key != "user_id" and key != "city_id":
                 setattr(place_obj, key, value)
         storage.save()
         return make_response(jsonify(place_obj.to_dict()), 200)
