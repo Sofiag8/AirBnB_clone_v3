@@ -3,6 +3,7 @@
 from models import storage
 from models.city import City
 from models.place import Place
+from models.user import User
 from models.review import Review
 from api.v1.views import app_views
 from flask import jsonify, request, make_response, abort
@@ -49,8 +50,8 @@ def review_post(place_id=None):
         return make_response(jsonify({'error': 'Missing user_id'}), 400)
     if 'text' not in request.get_json():
         return make_response(jsonify({'error': 'Missing text'}), 400)
-    place_objs = storage.get(Place, place_id)
     dict_body = request.get_json()
+    place_objs = storage.get(Place, place_id)
     user_objs = storage.get(User, dict_body["user_id"])
     if place_objs and user_objs:
         new_review = Review(**dict_body)
@@ -68,7 +69,7 @@ def review_put(review_id=None):
     if not request.get_json():
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
     dict_body = request.get_json()
-    review_obj = storage.get(Review, Review_id)
+    review_obj = storage.get(Review, review_id)
     if review_obj:
         for key, value in dict_body.items():
             if key != "id" and key != "created_at" and key != "updated_at"\
