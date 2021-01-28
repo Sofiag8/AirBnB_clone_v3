@@ -11,14 +11,12 @@ from flask import jsonify, request, make_response, abort
 def amenity_objs():
     """Retrieves the list of all Amenity Objects"""
     amenities_objs = storage.all(Amenity).values()
-    if amenities_objs:
-        return jsonify([obj.to_dict() for obj in amenities_objs])
-    abort(404)
+    return jsonify([obj.to_dict() for obj in amenities_objs])
 
 
 @app_views.route('/amenities/<amenity_id>', methods=['GET'],
                  strict_slashes=False)
-def amenity_by_id(city_id=None):
+def amenity_by_id(amenity_id=None):
     """Retrieves an Amenity object by its id"""
     amenity_obj = storage.get(Amenity, amenity_id)
     if amenity_obj:
