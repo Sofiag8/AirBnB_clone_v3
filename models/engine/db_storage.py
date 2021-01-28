@@ -84,15 +84,15 @@ class DBStorage:
                 returns the object based on the class and its ID,
                 or None if not found
         """
-        cls_objs = self.all(cls)
-        for value in cls_objs.values():
-            if value.id == id:
-                return value
+        if cls in classes.values():
+            cls_objs = self.all(cls)
+            for value in cls_objs.values():
+                if value.id == id:
+                    return value
         return None
 
     def count(self, cls=None):
         """ A method to count the number of objects in storage """
-        if cls is None:
-            return len(self.all())
-        else:
+        if cls:
             return len(self.all(cls))
+        return len(self.all())
