@@ -2,7 +2,7 @@
 """New view for State object that handles all default Restfullapi actions"""
 from models import storage
 from models.state import State
-from api.v1.app import not_found, app_views
+from api.v1.views import app_views
 from flask import jsonify, request, make_response, abort
 
 
