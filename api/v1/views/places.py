@@ -55,7 +55,7 @@ def place_post(city_id=None):
     user_info = storage.get(User, dict_body['user_id'])
     if city_objs and user_info:
         new_place = Place(**dict_body)
-        new_place.city_id = city.id
+        new_place.city_id = city_objs.id
         storage.new(new_place)
         storage.save()
         return make_response(jsonify(new_place.to_dict()), 201)
