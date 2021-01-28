@@ -48,10 +48,9 @@ def place_post(city_id=None):
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
     if 'user_id' not in request.get_json():
         return make_response(jsonify({'error': 'Missing user_id'}), 400)
-    if 'name' not in request.get_json():
-        return make_response(jsonify({'error': 'Missing name'}), 400)
-
     dict_body = request.get_json()
+    if 'name' dict_body:
+        return make_response(jsonify({'error': 'Missing name'}), 400)
     city_objs = storage.get(City, city_id)
     user_info = storage.get(User, dict_body['user_id'])
     if city_objs and user_info:
