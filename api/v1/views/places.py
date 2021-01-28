@@ -15,7 +15,7 @@ def place_objs(city_id=None):
     """Return all Place objects in a City"""
     place_objs_city = storage.get(City, city_id)
     if place_objs_city:
-        return jsonify([place.to_dict() for place in city.places])
+        return jsonify([place.to_dict() for place in place_objs_city.places])
     abort(404)
 
 
